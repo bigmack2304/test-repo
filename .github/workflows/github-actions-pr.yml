@@ -1,4 +1,4 @@
-name: GitHub Actions main
+name: GitHub Actions PR
 run-name: ${{ github.actor }} is main updated
 on:
   pull_request:
