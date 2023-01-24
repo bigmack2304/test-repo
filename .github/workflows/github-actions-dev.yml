@@ -46,6 +46,11 @@ jobs:
         with:
           path: ~/.npm
           key: project_dependencies-${{ hashFiles('**/package-lock.json') }}
+      - name: Save build
+        uses: actions/cache/save@v3
+        with:
+          path: ~/test-repo
+          key: asdf
       - name: Install modules
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
@@ -63,11 +68,6 @@ jobs:
         with:
           name: final
           path: dist/final
-      - name: Save build
-        uses: actions/cache/save@v3
-        with:
-          path: ~/test-repo
-          key: asdf
 
   deploy_dev:
     runs-on: ubuntu-latest
