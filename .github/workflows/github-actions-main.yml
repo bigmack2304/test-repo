@@ -1,0 +1,74 @@
+name: GitHub Actions main
+run-name: ${{ github.actor }} is main updated
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Get cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: project_dependencies-${{ hashFiles('**/package-lock.json') }}
+      - name: Install modules
+        run: npm ci
+      - name: Run tests
+        run: echo tests no detected
+
+  build_final:
+    runs-on: ubuntu-latest
+    needs: [tests]
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Get cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: project_dependencies-${{ hashFiles('**/package-lock.json') }}
+      - name: Install modules
+        run: npm ci
+      - name: Build final
+        run: npm run build_final
+      - name: Create final Artifacts 
+        uses: actions/upload-artifact@v1
+        with:
+          name: final
+          path: dist/final
+
+  deploy_final:
+    runs-on: ubuntu-latest
+    needs: [build_final]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Get cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: project_dependencies-${{ hashFiles('**/package-lock.json') }}
+      - name: Deploy final
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-page-preview
+          clean: true
+          folder: dist/final
+          target-folder: dist/final

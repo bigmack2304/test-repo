@@ -1,0 +1,250 @@
+@import url(./../media_constants.less);
+@import url(./../components/scroll.less);
+
+@sidebar_backrgound_collor: rgb(216, 216, 216);
+@sidebar_EsBackrgound_collor_desctop: #679b67;
+@sidebar_EsBackrgound_collor_desctop--dark: #2a3f42;
+@sidebar_anm_speed: 0.1s;
+@sidebar__elements--dark_background_color: #232529;
+@js-sidebar__element--background_color: rgb(136, 202, 136);
+@js-sidebar__element--dark_background_color: #406166;
+
+@keyframes anm_sidebar_open {
+    0% {
+        transform: translateX(-120%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes anm_sidebar_close {
+    0% {
+        transform: translateX(0);
+        // transform: inherit;
+    }
+    100% {
+        transform: translateX(-120%);
+    }
+}
+
+.anm_hide() {
+    animation-name: anm_sidebar_close;
+    animation-duration: @sidebar_anm_speed;
+    animation-fill-mode: both;
+    animation-timing-function: linear;
+}
+
+.anm_open() {
+    animation-name: anm_sidebar_open;
+    animation-duration: @sidebar_anm_speed;
+    animation-fill-mode: both;
+    animation-timing-function: linear;
+}
+
+.sidebarContainerMonitorCSS() {
+    height: 100%;
+}
+
+.js-sidebar {
+    transition: background-color, z-index ease-in @sidebar_anm_speed;
+
+    &--active {
+        background-color: rgba(0, 0, 0, 0.555);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        min-width: 250px;
+    }
+}
+
+.js-sidebar__header {
+    background-color: @sidebar_backrgound_collor;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-start;
+    box-shadow: inset -20px 0px 16px -17px #303030;
+}
+
+.sidebarButtonIcon() {
+    height: 35px;
+    width: 35px;
+}
+
+.sidebarButtonMonitorCSS() {
+    .js-sidebar_button__open_icon,
+    .js-sidebar_button__close_icon {
+        display: none;
+    }
+
+    &--active {
+        .js-sidebar_button__open_icon,
+        .js-sidebar_button__close_icon {
+            display: none;
+        }
+    }
+}
+
+.js-sidebar_button {
+    line-height: 0px;
+    padding: 0px;
+    border: none;
+    border-radius: 11px;
+    background-color: @sidebar_backrgound_collor;
+    width: fit-content;
+    height: fit-content;
+    z-index: 5;
+
+    .js-sidebar_button__close_icon {
+        .sidebarButtonIcon;
+        display: none;
+    }
+
+    .js-sidebar_button__open_icon {
+        .sidebarButtonIcon;
+    }
+
+    &--active {
+        .js-sidebar_button__open_icon {
+            display: none;
+        }
+        .js-sidebar_button__close_icon {
+            display: block;
+        }
+    }
+
+    @media (min-width: @const_win_size_mobile) and (max-width: calc(@const_win_size_monitor - 1px)) {
+        .sidebarButtonMonitorCSS;
+    }
+    @media (min-width: @const_win_size_monitor) {
+        .sidebarButtonMonitorCSS;
+    }
+}
+
+.sidebarElementsMonitorCSS() {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+    overflow-x: overlay;
+    scroll-snap-type: x mandatory; // чото типа автодоводки на элемент при скролле, работает вместе с scroll-snap-align
+    height: 100%;
+}
+
+.js-sidebar__elements {
+    margin: 0;
+    padding: 0;
+    z-index: 5;
+
+    @media (min-width: @const_win_size_min) and (max-width: calc(@const_win_size_mobile - 1px)) {
+        position: fixed;
+        overflow-y: auto;
+        overflow-x: hidden;
+        scroll-snap-type: y mandatory;
+        border-top: 4px black solid;
+        box-shadow: inset -20px 0px 16px -17px #303030;
+        background-color: @sidebar_backrgound_collor;
+        top: 0;
+        width: 75%;
+        min-width: 190px;
+        height: 100vh;
+
+        .anm_hide;
+
+        .js-addon_dark_theme_button {
+            display: none;
+        }
+
+        &--active {
+            .anm_open;
+
+            .js-addon_dark_theme_button {
+                display: block;
+            }
+        }
+
+        &--dark {
+            border-top: 4px rgb(199, 199, 199) solid;
+            box-shadow: inset -20px 0px 16px -17px #000000;
+            background-color: @sidebar__elements--dark_background_color;
+        }
+    }
+    @media (min-width: @const_win_size_mobile) and (max-width: calc(@const_win_size_monitor - 1px)) {
+        .sidebarElementsMonitorCSS;
+        .scroll--white(6px, 2px, 4px);
+
+        &--dark {
+            .scroll--dark(6px, 2px, 4px);
+        }
+    }
+    @media (min-width: @const_win_size_monitor) {
+        .sidebarElementsMonitorCSS;
+        .scroll--white(6px, 2px, 4px);
+
+        &--dark {
+            .scroll--dark(6px, 2px, 4px);
+        }
+    }
+}
+
+.sidebarElementMonitorCSS() {
+    padding: 0px 10px 0px 10px;
+
+    &:nth-of-type(n + 2) {
+        border-right: 1px black solid;
+    }
+
+    &:last-of-type {
+        border-left: 1px black solid;
+    }
+
+    &--dark {
+        &:nth-of-type(n + 2) {
+            border-right: 1px rgb(199, 199, 199) solid;
+        }
+
+        &:last-of-type {
+            border-left: 1px rgb(199, 199, 199) solid;
+        }
+    }
+}
+
+.js-sidebar__element {
+    list-style-type: none;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    scroll-snap-align: center;
+    background-color: @js-sidebar__element--background_color;
+
+    &--dark {
+        background-color: @js-sidebar__element--dark_background_color;
+    }
+
+    @media (min-width: @const_win_size_min) and (max-width: calc(@const_win_size_mobile - 1px)) {
+        padding: 5px 15px 5px 15px;
+        box-shadow: inset -20px 0px 16px -17px #303030;
+
+        &:nth-of-type(n + 2) {
+            border-top: 2px black solid;
+        }
+
+        &--dark {
+            box-shadow: inset -20px 0px 16px -17px #000000;
+
+            &:nth-of-type(n + 2) {
+                border-top: 2px rgb(199, 199, 199) solid;
+            }
+        }
+    }
+    @media (min-width: @const_win_size_mobile) and (max-width: calc(@const_win_size_monitor - 1px)) {
+        .sidebarElementMonitorCSS;
+    }
+    @media (min-width: @const_win_size_monitor) {
+        .sidebarElementMonitorCSS;
+    }
+}

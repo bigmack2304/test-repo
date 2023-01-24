@@ -1,0 +1,45 @@
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+.visually_hidden {
+    // скрывает блок вместе с содержимим (но при этом он доступен)
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+}
+
+.svg_sprait {
+    // свг спраит
+    display: none;
+}
+
+.deactivated {
+    // неактивный элемент
+    opacity: 65%; // прозрачность
+    cursor: no-drop; // состояние курсора на элементе
+    pointer-events: none; // Отключить любое реагирование на кнопки мыши
+}
+
+*:disabled {
+    .deactivated;
+}
+
+button:disabled {
+    // любая неактивная кнопка
+    border-color: #44444486;
+    .deactivated;
+}
+
+.scroll_remove {
+    overflow: hidden;
+}
