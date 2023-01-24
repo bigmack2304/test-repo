@@ -1,5 +1,5 @@
 name: GitHub Actions PR
-run-name: ${{ github.actor }} is main updated
+run-name: ${{ github.actor }} check PR
 on:
   pull_request:
 jobs:
