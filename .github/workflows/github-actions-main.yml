@@ -36,11 +36,7 @@ jobs:
           folder: dist/final
           target-folder: dist/final
 
-      - name: Git version
-        uses: codacy/git-version@2.7.1
-        with:
-          prefix: "prefix"
-          major-identifier: "1"
-          minor-identifier: "2"
-          dev-branch: dev
-          release-branch: main
+      - name: Create new relase
+        run: gh release create v1.0.${{github.run_number}} --title "v1.0.${{github.run_number}}" --notes "" --target main
+        env:
+          GITHUB_TOKEN: ${{ secrets.TESTREPO_GITHUB_TOKEN }}
