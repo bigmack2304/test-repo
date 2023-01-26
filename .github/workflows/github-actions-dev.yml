@@ -46,7 +46,6 @@ jobs:
           target-folder: dist/dev
 
       - name: Git version
-        id: version
         uses: codacy/git-version@2.7.1
         with:
           prefix: "prefix"
@@ -54,5 +53,4 @@ jobs:
           minor-identifier: "2"
           dev-branch: dev
           release-branch: main
-        run: echo ${{ steps.version.outputs.version }}
 
