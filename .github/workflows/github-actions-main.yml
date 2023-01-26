@@ -36,7 +36,7 @@ jobs:
           folder: dist/final
           target-folder: dist/final
 
-      - name: Create tag
-        run: gh release create v1.0.${{github.run_number}} --notes "notes" --title "title" --target main
+      - name: Create new relase
+        run: gh release create v1.0.${{github.run_number}} --title "v1.0.${{github.run_number}}" --notes "" --target main
         env:
           GITHUB_TOKEN: ${{ secrets.TESTREPO_GITHUB_TOKEN }}
