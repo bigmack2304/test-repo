@@ -36,7 +36,15 @@ jobs:
           folder: dist/final
           target-folder: dist/final
 
-      - name: update version
-        run: gh release create v1.0.${{secrets.VERSION}} --title "v1.0.${{secrets.VERSION}}" --notes "" --target main
-        env:
-          GITHUB_TOKEN: ${{ secrets.TESTREPO_GITHUB_TOKEN }}
+      - name: Git version
+        id: version
+        uses: codacy/git-version@2.7.1
+        with:
+          prefix: "prefix"
+          major-identifier: "1"
+          minor-identifier: "2"
+          dev-branch: dev
+          release-branch: main
+
+      - name: version
+        run: echo ${{ steps.version.outputs.version }}
