@@ -44,3 +44,13 @@ jobs:
           clean: true
           folder: dist/dev
           target-folder: dist/dev
+
+      - name: Git version
+        uses: codacy/git-version@2.7.1
+        with:
+          prefix: "prefix"
+          major-identifier: "1"
+          minor-identifier: "2"
+          dev-branch: dev
+          release-branch: main
+
