@@ -44,3 +44,10 @@ jobs:
           clean: true
           folder: dist/dev
           target-folder: dist/dev
+
+      - name: Create dev relase
+        run: |
+          gh release delete v1.0.${{github.run_number - 1}} -y
+          gh release create v1.0.${{github.run_number}} --title "v1.0.${{github.run_number}}" --notes "" --target main --draft
+        env:
+          GITHUB_TOKEN: ${{ secrets.TESTREPO_GITHUB_TOKEN }}
