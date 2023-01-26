@@ -46,3 +46,6 @@ jobs:
           dev-branch: dev
           release-branch: main
         run: echo ${{ steps.version.outputs.version }}
+
+      - name: version
+        run: echo ${{ steps.version.outputs.version }}
