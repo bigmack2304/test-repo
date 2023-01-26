@@ -606,7 +606,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-console.log("2222222222");
+console.log("22222222ыывыувывы22");
 var support_class_dark_theme = ["body", "header", "main", "footer", "def_icon__icon", "header__horisontal_line", "file_info", "text_in_file", "text_blue", "addon_spoiler_heder", "addon_spoiler_body", "js-sidebar__element", "js-sidebar__elements", "header__button_wrapper"];
 var Dark_theme = new _my_libs_addon_dark_theme__WEBPACK_IMPORTED_MODULE_2__.Addon_dark_theme({
   classes_dark_style: support_class_dark_theme
@@ -1532,4 +1532,4 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=index.e1c2c1d1b41c5344d4a3.js.map
+//# sourceMappingURL=index.f5e9c78d1806363568bc.js.map
