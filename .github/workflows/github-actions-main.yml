@@ -35,4 +35,6 @@ jobs:
           clean: true
           folder: dist/final
           target-folder: dist/final
+
+      - name: Create tag
         run: git tag v1.0.${{github.run_number}}
